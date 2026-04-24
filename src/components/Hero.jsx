@@ -1,4 +1,4 @@
-
+import DecryptedText from './Animations/DecryptedText'
 
 const Hero = () => {
   const handleCTAClick = (e) => {
@@ -28,7 +28,13 @@ const Hero = () => {
           </div>
 
           <p className="hero__name">
-            M. Rifqi Nauval Nibroos
+            <DecryptedText 
+              text="M. Rifqi Nauval Nibroos" 
+              animateOn="view" 
+              revealDirection="start" 
+              speed={300}
+              revealMode="word"
+            />
           </p>
 
           <p className="hero__tagline">

@@ -1,5 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { FaInstagram, FaLinkedinIn, FaGithub } from 'react-icons/fa'
+import TypewriterText from './Animations/TypewriterText'
+import ScrollReveal from './Animations/ScrollReveal'
 
 const skills = [
   'UI/UX Design', 'FrontEnd Dev', 'Figma', 'React', 'Spring Boot', 'Python', 'Ms. Office'
@@ -14,6 +16,8 @@ const About = () => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('visible')
+          } else {
+            entry.target.classList.remove('visible')
           }
         })
       },
@@ -83,20 +87,26 @@ const About = () => {
               about me
             </div>
             <h2 className="section-title">
-              Hi, I'm Rifqi!
+              <TypewriterText text="Hi, I'm Rifqi!" delay={100} />
             </h2>
             <p className="about__intro">
-              As a student and a tech enthusiast, I spend most of my time exploring the latest innovations and learning through building. I’m driven by curiosity, always growing, and using this space to document my journey in the tech world.
+              <ScrollReveal enableBlur={true} baseOpacity={0.8} baseRotation={0}>
+                As a student and a tech enthusiast, I spend most of my time exploring the latest innovations and learning through building. I’m driven by curiosity, always growing, and using this space to document my journey in the tech world.
+              </ScrollReveal>
             </p>
             <p className="about__intro">
-              I’m a firm believer that the best growth happens through connection. Whether it's through social events or organizations, I love meeting new people and learning from diverse perspectives. Let’s connect and create something functional, impactful, and innovative together.
+              <ScrollReveal enableBlur={true} baseOpacity={0.8} baseRotation={0}>
+                I’m a firm believer that the best growth happens through connection. Whether it's through social events or organizations, I love meeting new people and learning from diverse perspectives. Let’s connect and create something functional, impactful, and innovative together.
+              </ScrollReveal>
             </p>
 
             <div className="about__info-card" style={{ marginTop: '20px' }}>
               <div className="about__skills">
                 {skills.map((skill) => (
                   <span key={skill} className="about__skill-tag">
-                    {skill}
+                    <ScrollReveal baseOpacity={0.8} enableBlur={true}>
+                      {skill}
+                    </ScrollReveal>
                   </span>
                 ))}
               </div>

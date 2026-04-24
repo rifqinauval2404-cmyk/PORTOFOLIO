@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import TypewriterText from './Animations/TypewriterText'
 
 const projects = [
   {
@@ -58,6 +59,8 @@ const Projects = () => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('visible')
+          } else {
+            entry.target.classList.remove('visible')
           }
         })
       },
@@ -79,7 +82,7 @@ const Projects = () => {
             <span className="section-label__dot" />
             Experience
           </div>
-          <h2 className="section-title">Professional Experience</h2>
+          <h2 className="section-title"><TypewriterText text="Professional Experience" delay={80} /></h2>
           <p className="section-subtitle">
             Beberapa pencapaian dan peran yang telah saya jalani selama kuliah.
           </p>
@@ -111,7 +114,7 @@ const Projects = () => {
             <span className="section-label__dot" />
             Proyek
           </div>
-          <h2 className="section-title">Work Archive</h2>
+          <h2 className="section-title"><TypewriterText text="Work Archive" delay={80} /></h2>
           <p className="section-subtitle">
             Proyek-proyek utama yang telah saya kembangkan.
           </p>

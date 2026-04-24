@@ -1,5 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { FiMail, FiGithub, FiLinkedin } from 'react-icons/fi'
+import TypewriterText from './Animations/TypewriterText'
+import RotatingText from './Animations/RotatingText'
 
 const contactLinks = [
   {
@@ -31,6 +33,8 @@ const Contact = () => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('visible')
+          } else {
+            entry.target.classList.remove('visible')
           }
         })
       },
@@ -52,7 +56,7 @@ const Contact = () => {
             Kontak
           </div>
           <h2 className="contact__heading">
-            Mari Bekerja Sama
+            Let's <RotatingText texts={['Work', 'Build']} className="rotating-text" /> Together!
           </h2>
           <p className="contact__text">
             Saya selalu terbuka untuk peluang baru, proyek kolaboratif, atau bahkan sekadar
