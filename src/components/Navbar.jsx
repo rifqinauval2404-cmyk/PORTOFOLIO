@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react'
+import { Dock, DockItem } from './Animations/Dock'
+
 
 const navLinks = [
   { id: 'beranda', label: 'Home' },
@@ -46,18 +48,18 @@ const Navbar = () => {
   return (
     <nav className="navbar" id="navbar">
       <div className="navbar__pill">
-        <div className={`navbar__links ${menuOpen ? 'open' : ''}`}>
+        <Dock className={`navbar__links ${menuOpen ? 'open' : ''}`}>
           {navLinks.map(link => (
-            <a
+            <DockItem
               key={link.id}
               href={`#${link.id}`}
               className={`navbar__link ${activeSection === link.id ? 'active' : ''}`}
               onClick={(e) => handleNavClick(e, link.id)}
             >
               {link.label}
-            </a>
+            </DockItem>
           ))}
-        </div>
+        </Dock>
 
         <button
           className={`navbar__hamburger ${menuOpen ? 'open' : ''}`}

@@ -4,14 +4,14 @@ import About from './components/About'
 import Projects from './components/Projects'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
-import Starfield from './components/Starfield'
+import { StarsBackground } from './components/StarsBackground'
 import RocketCursor from './components/RocketCursor'
 
 function App() {
   return (
     <div className="app">
       <RocketCursor />
-      <Starfield />
+      <StarsBackground />
       <Navbar />
       <main>
         <Hero />

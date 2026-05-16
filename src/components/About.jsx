@@ -73,7 +73,7 @@ const About = () => {
 
               <div className="profile-card__socials">
                 <a href="https://www.instagram.com/rifqinaufll_?igsh=MWxja25qMXZ4ZWVkcg%3D%3D&utm_source=qr" className="profile-card__social-link" title="Instagram"><FaInstagram /></a>
-                <a href="#" className="profile-card__social-link" title="LinkedIn"><FaLinkedinIn /></a>
+                <a href="https://www.linkedin.com/in/muhammad-rifqi-nauval-nibroos-92538a3ab" className="profile-card__social-link" title="LinkedIn"><FaLinkedinIn /></a>
                 <a href="https://github.com/rifqinauval2404-cmyk" className="profile-card__social-link" title="GitHub"><FaGithub /></a>
 
               </div>

@@ -32,6 +32,26 @@ const projects = [
       'Sebuah platform digital yang memfasilitasi donasi dan distribusi bantuan secara terintegrasi. Berbasis Web App, Salur-in dirancang untuk menghubungkan donatur dengan penerima bantuan secara efisien dan transparan, mencakup berbagai kanal donasi serta manajemen program bantuan.',
     tags: ['Web App', 'Web Design', 'UX/UI', 'Desain'],
   },
+  {
+    id: 4,
+    icon: '💰',
+    image: '/logo_urunan.jpeg', // User can replace this path
+    number: '04',
+    title: 'Urunan.ae',
+    description:
+      'aplikasi untuk split bill dengan mudah',
+    tags: ['Web App', 'Web Design', 'UX/UI', 'Desain'],
+  },
+  {
+    id: 5,
+    icon: '💰',
+    image: '/logo_DuitFam.jpeg', // User can replace this path
+    number: '05',
+    title: 'DuitFam',
+    description:
+      'Aplikasi manajemen keuangan yang dirancang khusus untuk keluarga. DuitFam memudahkan anggota keluarga dalam memantau pengeluaran bersama, dan melacak riwayat transaksi secara real-time. Dengan fitur-fitur intuitif.',
+    tags: ['Web App', 'Web Design', 'UX/UI', 'Desain'],
+  },
 ]
 
 const experience = [

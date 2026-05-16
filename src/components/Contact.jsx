@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { FiMail, FiGithub, FiLinkedin } from 'react-icons/fi'
+import { FaEnvelope, FaGithub, FaLinkedinIn } from 'react-icons/fa'
 import TypewriterText from './Animations/TypewriterText'
 import RotatingText from './Animations/RotatingText'
 
@@ -7,20 +7,20 @@ const contactLinks = [
   {
     id: 'email',
     label: 'Email',
-    icon: <FiMail />,
-    href: 'mailto:rifqi@email.com',
+    icon: <FaEnvelope />,
+    href: 'mailto:rifqinauval2404@gmail.com',
   },
   {
     id: 'github',
     label: 'GitHub',
-    icon: <FiGithub />,
-    href: 'https://github.com/',
+    icon: <FaGithub />,
+    href: 'https://github.com/rifqinauval2404-cmyk',
   },
   {
     id: 'linkedin',
     label: 'LinkedIn',
-    icon: <FiLinkedin />,
-    href: 'https://linkedin.com/',
+    icon: <FaLinkedinIn />,
+    href: 'https://www.linkedin.com/in/muhammad-rifqi-nauval-nibroos-92538a3ab/',
   },
 ]
 
@@ -58,24 +58,23 @@ const Contact = () => {
           <h2 className="contact__heading">
             Let's <RotatingText texts={['Work', 'Build']} className="rotating-text" /> Together!
           </h2>
-          <p className="contact__text">
-            Saya selalu terbuka untuk peluang baru, proyek kolaboratif, atau bahkan sekadar
-            obrolan tentang teknologi. Jangan ragu untuk menghubungi saya — mari ciptakan
-            sesuatu yang luar biasa bersama. ✨
-          </p>
+
 
           <div className="contact__links">
             {contactLinks.map((link) => (
               <a
                 key={link.id}
                 href={link.href}
-                className="contact__link"
+                className={`contact__link contact__link--${link.id}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 id={`contact-${link.id}`}
               >
-                <span className="contact__link-icon">{link.icon}</span>
-                {link.label}
+                <div className="contact__link-icon">{link.icon}</div>
+                <div className="contact__link-text">
+                  <span>{link.subLabel}</span>
+                  <span>{link.label}</span>
+                </div>
               </a>
             ))}
           </div>
