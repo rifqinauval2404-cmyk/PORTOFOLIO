@@ -59,7 +59,7 @@ const projects = [
     number: '06',
     title: 'PHOTOCOFF',
     description:
-      'Aplikasi manajemen keuangan berbasis Web. Mampu memfasilitasi pembelajaran yang lebih interaktif dan menyenangkan.',
+      'Platform untuk Photobooth dengan gaya yang modern dan aesthetic',
     tags: ['Web App', 'Web Design', 'UX/UI', 'Desain'],
   },
 ]
