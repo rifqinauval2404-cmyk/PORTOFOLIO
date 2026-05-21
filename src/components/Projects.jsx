@@ -52,6 +52,16 @@ const projects = [
       'Aplikasi manajemen keuangan yang dirancang khusus untuk keluarga. DuitFam memudahkan anggota keluarga dalam memantau pengeluaran bersama, dan melacak riwayat transaksi secara real-time. Dengan fitur-fitur intuitif.',
     tags: ['Web App', 'Web Design', 'UX/UI', 'Desain'],
   },
+  {
+    id: 6,
+    icon: '💰',
+    image: '/bgphotocoff2.png', // User can replace this path
+    number: '06',
+    title: 'PHOTOCOFF',
+    description:
+      'Aplikasi manajemen keuangan berbasis Web. Mampu memfasilitasi pembelajaran yang lebih interaktif dan menyenangkan.',
+    tags: ['Web App', 'Web Design', 'UX/UI', 'Desain'],
+  },
 ]
 
 const experience = [
