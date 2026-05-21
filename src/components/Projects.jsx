@@ -55,28 +55,12 @@ const projects = [
   {
     id: 6,
     icon: '💰',
-    image: '/bgphotocoff2.png', // User can replace this path
+    image: '/PHOTOCOFF_Logo.png', // User can replace this path
     number: '06',
     title: 'PHOTOCOFF',
     description:
       'Platform untuk Photobooth dengan gaya yang modern dan aesthetic',
     tags: ['Web App', 'Web Design', 'UX/UI', 'Desain'],
-  },
-]
-
-const experience = [
-
-  {
-    role: 'Education & Documentation Coordinator',
-    company: 'SMP TELKOM BANDUNG',
-    period: '2026',
-    description: 'Melakukan analisis komparatif performa algoritma LSTM dan SVR untuk memprediksi harga saham dengan akurasi yang optimal.',
-  },
-  {
-    role: 'Data Entry',
-    company: 'Dinas Pendidikan dan Kebudayaan',
-    period: '2024',
-    description: 'Mengelola administratif dan memvalidasi dokumen operasional kantor',
   },
 ]
 
@@ -104,42 +88,10 @@ const Projects = () => {
   }, [])
 
   return (
-    <section className="section" id="pengalaman" ref={sectionRef}>
+    <section className="section" id="proyek" ref={sectionRef}>
       <div className="container">
-        {/* Experience Timeline */}
-        <div className="experience fade-in" style={{ paddingTop: 0 }}>
-          <div className="section-label">
-            <span className="section-label__dot" />
-            Experience
-          </div>
-          <h2 className="section-title"><TypewriterText text="Professional Experience" delay={80} /></h2>
-          <p className="section-subtitle">
-            Beberapa pencapaian dan peran yang telah saya jalani selama kuliah.
-          </p>
-
-          <div className="experience__list">
-            {experience.map((item, i) => (
-              <div
-                key={i}
-                className="experience__item fade-in"
-                style={{ transitionDelay: `${i * 0.12}s` }}
-              >
-                <div>
-                  <div className="experience__role">{item.role}</div>
-                  <div className="experience__company">{item.company}</div>
-                  <p className="experience__description">{item.description}</p>
-                </div>
-                <div className="experience__dot-col">
-                  <div className="experience__dot" />
-                </div>
-                <div className="experience__period">{item.period}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-
         {/* Project Cards */}
-        <div className="projects fade-in" style={{ paddingTop: 80 }}>
+        <div className="projects fade-in" style={{ paddingTop: 0 }}>
           <div className="section-label">
             <span className="section-label__dot" />
             Proyek

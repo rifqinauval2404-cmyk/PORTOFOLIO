@@ -5,7 +5,8 @@ import { Dock, DockItem } from './Animations/Dock'
 const navLinks = [
   { id: 'beranda', label: 'Home' },
   { id: 'tentang', label: 'About Me' },
-  { id: 'pengalaman', label: 'Projects' },
+  { id: 'pengalaman', label: 'Experience' },
+  { id: 'proyek', label: 'Projects' },
   { id: 'kontak', label: 'Contact' },
 ]
 

@@ -16,7 +16,7 @@ const Footer = () => {
       <div className="footer__inner">
 
         <p className="footer__text" style={{ textAlign: 'center', margin: 'auto' }}>
-          © {year} M. Rifqi Nauval Nibroos - to infinity and beyond
+          rifqinauval2404@gmail.com - to infinity and beyond
         </p>
 
       </div>
