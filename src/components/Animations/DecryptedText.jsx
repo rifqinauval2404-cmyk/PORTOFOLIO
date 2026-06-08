@@ -39,6 +39,7 @@ export default function DecryptedText({
   animateOn = 'hover',
   clickMode = 'once',
   revealMode = 'character', // 'character' or 'word'
+  replayInterval = 0,
   ...props
 }) {
   const [displayText, setDisplayText] = useState(text);
@@ -141,16 +142,17 @@ export default function DecryptedText({
   }, [text, shuffleText]);
 
   const triggerDecrypt = useCallback(() => {
+    const emptySet = new Set();
+    setRevealedIndices(emptySet);
+    setDisplayText(shuffleText(text, emptySet));
+    setIsDecrypted(false);
     if (sequential) {
       orderRef.current = computeOrder(text.length);
       pointerRef.current = 0;
-      setRevealedIndices(new Set());
-    } else {
-      setRevealedIndices(new Set());
     }
     setDirection('forward');
     setIsAnimating(true);
-  }, [sequential, computeOrder, text.length]);
+  }, [sequential, computeOrder, text, shuffleText]);
 
   const triggerReverse = useCallback(() => {
     if (sequential) {
@@ -165,6 +167,18 @@ export default function DecryptedText({
     setDirection('reverse');
     setIsAnimating(true);
   }, [sequential, computeOrder, fillAllIndices, shuffleText, text]);
+
+  useEffect(() => {
+    if (replayInterval <= 0) return;
+
+    const interval = setInterval(() => {
+      if (document.visibilityState === 'visible') {
+        triggerDecrypt();
+      }
+    }, replayInterval);
+
+    return () => clearInterval(interval);
+  }, [replayInterval, triggerDecrypt]);
 
   useEffect(() => {
     if (!isAnimating) return;

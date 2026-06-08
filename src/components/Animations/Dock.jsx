@@ -1,19 +1,29 @@
-import { useRef, Children, cloneElement, isValidElement } from 'react';
+import { useRef, Children, cloneElement, isValidElement, useState, useEffect } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 
 export const Dock = ({ children, className }) => {
   const mouseX = useMotionValue(Infinity);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   return (
     <motion.div
-      onMouseMove={(e) => mouseX.set(e.pageX)}
-      onMouseLeave={() => mouseX.set(Infinity)}
+      onMouseMove={(e) => !isMobile && mouseX.set(e.pageX)}
+      onMouseLeave={() => !isMobile && mouseX.set(Infinity)}
       className={className}
-      style={{ display: 'flex', alignItems: 'center', gap: '4px' }}
+      style={isMobile ? {} : { display: 'flex', alignItems: 'center', gap: '4px' }}
     >
       {Children.map(children, (child) => {
         if (isValidElement(child)) {
-          return cloneElement(child, { mouseX });
+          return cloneElement(child, { mouseX, isMobile });
         }
         return child;
       })}
@@ -21,7 +31,7 @@ export const Dock = ({ children, className }) => {
   );
 };
 
-export const DockItem = ({ children, className, mouseX, onClick, href }) => {
+export const DockItem = ({ children, className, mouseX, onClick, href, isMobile }) => {
   const ref = useRef(null);
 
   const distance = useTransform(mouseX, (val) => {
@@ -43,15 +53,20 @@ export const DockItem = ({ children, className, mouseX, onClick, href }) => {
       href={href}
       className={className}
       onClick={onClick}
-      style={{ 
-        scale, 
-        margin: margin, // Push neighbors
-        transformOrigin: "center",
-        display: "inline-block", // Ensure transform works
-        willChange: "transform, margin" // Performance
-      }}
+      style={
+        isMobile
+          ? { display: 'block' }
+          : {
+              scale,
+              margin,
+              transformOrigin: 'center',
+              display: 'inline-block',
+              willChange: 'transform, margin',
+            }
+      }
     >
       {children}
     </motion.a>
   );
 };
+

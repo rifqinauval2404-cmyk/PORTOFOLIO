@@ -259,6 +259,10 @@ main {
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
 }
 
+.navbar__logo {
+  display: none;
+}
+
 .navbar__link {
   padding: 10px 22px;
   border-radius: var(--radius-full);
@@ -304,7 +308,7 @@ main {
 }
 
 .navbar__hamburger.open span:nth-child(1) {
-  transform: rotate(45deg) translate(5px, 5px);
+  transform: translateY(7px) rotate(45deg);
 }
 
 .navbar__hamburger.open span:nth-child(2) {
@@ -312,7 +316,7 @@ main {
 }
 
 .navbar__hamburger.open span:nth-child(3) {
-  transform: rotate(-45deg) translate(5px, -5px);
+  transform: translateY(-7px) rotate(-45deg);
 }
 
 .navbar__overlay {
@@ -1552,6 +1556,26 @@ main {
     width: 100%;
   }
 
+  .navbar__logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-white);
+    padding-left: 12px;
+    font-family: var(--font-heading);
+    letter-spacing: -0.5px;
+  }
+
+  .navbar__logo-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--accent-primary);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--accent-primary);
+  }
+
   .navbar__links {
     position: fixed;
     top: 0;
@@ -1559,12 +1583,13 @@ main {
     width: 75%;
     max-width: 300px;
     height: 100vh;
+    display: flex;
     flex-direction: column;
     background: rgba(10, 10, 26, 0.95);
     backdrop-filter: blur(30px);
     -webkit-backdrop-filter: blur(30px);
     padding: 100px 28px 40px;
-    gap: 4px;
+    gap: 12px;
     transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     border-left: 1px solid rgba(255, 255, 255, 0.06);
     z-index: 100;
@@ -1654,9 +1679,8 @@ main {
   }
 
   .contact__link {
-    width: 100%;
-    max-width: 280px;
-    justify-content: center;
+    width: 140px;
+    height: 140px;
   }
 
   /* Footer mobile */
@@ -1716,4 +1740,37 @@ main {
    ============================================ */
 .typewriter {
   display: inline-block;
+}
+
+/* ============================================
+   GALLERY SECTION
+   ============================================ */
+.gallery-section {
+  margin-top: 100px;
+  position: relative;
+  width: 100%;
+}
+
+.gallery-container {
+  width: 100%;
+  height: 520px;
+  margin-top: 40px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: rgba(10, 10, 30, 0.4);
+  border: 1px solid var(--surface-card-border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  position: relative;
+}
+
+@media (max-width: 768px) {
+  .gallery-section {
+    margin-top: 60px;
+  }
+  
+  .gallery-container {
+    height: 380px;
+    margin-top: 24px;
+  }
 }

@@ -49,6 +49,11 @@ const Navbar = () => {
   return (
     <nav className="navbar" id="navbar">
       <div className="navbar__pill">
+        <div className="navbar__logo">
+          <span className="navbar__logo-dot"></span>
+          RN
+        </div>
+
         <Dock className={`navbar__links ${menuOpen ? 'open' : ''}`}>
           {navLinks.map(link => (
             <DockItem

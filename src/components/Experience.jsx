@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import TypewriterText from './Animations/TypewriterText'
+import CircularGallery from './CircularGallery'
 
 const professionalExperience = [
   {
@@ -19,71 +20,77 @@ const professionalExperience = [
 const organizationExperience = [
   {
     id: 1,
-    role: 'Staff of Creative & Design Division',
-    organization: 'Himpunan Mahasiswa Informatika (HMIF) Telkom University',
-    period: '2023 - Present',
-    description: 'Bertanggung jawab atas pembuatan aset visual, publikasi media sosial, dan merancang UI/UX untuk website event Himpunan. Berkolaborasi dengan tim untuk meningkatkan engagement media sosial hingga 40%.',
-    tags: ['UI/UX Design', 'Branding', 'Figma'],
+    role: 'Anggota Divisi Pengembangan Karakter',
+    organization: 'Budi Pekerti ',
+    period: '2024 - 2025',
+    description: 'Ketua Pelaksana Webinar “Developing Strong Character for Future Leaders” (2025). Bendahara Seminar “How improve A Good Habit” (2025) ',
     size: 'large',
     color: 'purple',
     icon: '🚀',
   },
   {
     id: 2,
-    role: 'Ketua Divisi Hubungan Masyarakat (Humas)',
-    organization: 'OSIS SMAN 2 Tenggarong',
-    period: '2021 - 2022',
-    description: 'Memimpin koordinasi publikasi dan dokumentasi seluruh kegiatan sekolah. Berhasil menyelenggarakan 5+ festival seni dan olahraga tingkat kabupaten, serta menjalin kerja sama sponsor dengan pihak luar.',
-    tags: ['Leadership', 'Public Speaking', 'Event Organizing'],
+    role: 'Anggota Divisi Logistik',
+    organization: 'Intelekta',
+    period: '2025',
+    description: 'Bertanggung jawab atas pengelolaan inventaris, perlengkapan, dan logistik untuk seluruh kegiatan organisasi. Mengatur jadwal peminjaman dan memastikan ketersediaan alat untuk acara sekolah dan ekstrakurikuler.',
     size: 'tall',
     color: 'blue',
     icon: '📢',
   },
   {
     id: 3,
-    role: 'Koordinator Web Developer',
-    organization: 'Informatics Welcoming Party Telkom University',
-    period: '2024',
-    description: 'Memimpin tim pengembang untuk membuat website interaktif penyambutan mahasiswa baru Informatika Telkom University.',
-    tags: ['React', 'CSS', 'Teamwork'],
+    role: 'Anggota Divisi Sponsor dan Penggalangan dana.',
+    organization: 'Investprenereur ',
+    period: '2026 - Sekarang',
+    description: 'Bertanggung jawab mencari pendanaan untuk kegiatan organisasi.',
     size: 'small',
     color: 'green',
     icon: '💻',
   },
   {
     id: 4,
-    role: 'UI/UX & Frontend Tutor',
-    organization: 'Google Developer Student Clubs (GDSC) Telkom University',
-    period: '2024 - Present',
-    description: 'Menjadi tutor kelas UI/UX & Web Development dasar bagi anggota GDSC, membimbing pembuatan prototype portofolio menarik.',
-    tags: ['Mentoring', 'Frontend', 'Figma'],
+    role: 'Anggota',
+    organization: 'Fortran',
+    period: '2024',
+    description: 'Anggota aktif dalam kegiatan Fortran yang bergerak dalam bidang teknologi, inovasi dan pengembangan karakter.',
     size: 'small',
     color: 'pink',
     icon: '🎨',
   },
-  {
-    id: 5,
-    role: 'Staff Dokumentasi & Publikasi',
-    organization: 'Pengabdian Masyarakat (Community Service) Bandung',
-    period: '2024',
-    description: 'Mengambil dokumentasi video/foto kegiatan pengabdian masyarakat di desa terpencil, serta mendesain media edukasi literasi digital bagi anak-anak usia sekolah dasar.',
-    tags: ['Photography', 'Social Service', 'Videography'],
-    size: 'wide',
-    color: 'orange',
-    icon: '📷',
-  },
-  {
-    id: 6,
-    role: 'Staff of Creative & Design Division',
-    organization: 'Himpunan Mahasiswa Informatika (HMIF) Telkom University',
-    period: '2023 - Present',
-    description: 'Bertanggung jawab atas pembuatan aset visual, publikasi media sosial, dan merancang UI/UX untuk website event Himpunan. Berkolaborasi dengan tim untuk meningkatkan engagement media sosial hingga 40%.',
-    tags: ['UI/UX Design', 'Branding', 'Figma'],
-    size: 'large',
-    color: 'purple',
-    icon: '🚀',
-  },
 ]
+
+const galleryItems = [
+  {
+    image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=800&auto=format&fit=crop',
+    text: 'Webinar Leadership'
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=800&auto=format&fit=crop',
+    text: 'Seminar Habit'
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=800&auto=format&fit=crop',
+    text: 'Divisi Logistik'
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?q=80&w=800&auto=format&fit=crop',
+    text: 'Investpreneur Funding'
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=800&auto=format&fit=crop',
+    text: 'Fortran Tech Dev'
+  },
+  {
+    image: '/photo_juara.jpeg',
+    text: 'Achievement'
+  },
+  {
+    image: '/pototgg.png',
+    text: 'Campus Life'
+  }
+]
+
 const Experience = () => {
   const sectionRef = useRef(null)
 
@@ -188,15 +195,35 @@ const Experience = () => {
                   <p className="bento-card__desc">{item.description}</p>
                 </div>
 
-                <div className="bento-card__footer">
-                  {item.tags.map((tag) => (
-                    <span key={tag} className="bento-card__tag">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
+
+                {item.tags && item.tags.length > 0 && (
+                  <div className="bento-card__footer">
+                    {item.tags.map((tag) => (
+                      <span key={tag} className="bento-card__tag">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
               </div>
             ))}
+          </div>
+        </div>
+
+        {/* Gallery Section */}
+        <div className="gallery-section fade-in">
+          <div className="section-label">
+            <span className="section-label__dot" />
+            Gallery
+          </div>
+          <h2 className="section-title">
+            <TypewriterText text="Moments & Memories" delay={80} />
+          </h2>
+          <p className="section-subtitle">
+            Kumpulan dokumentasi kegiatan organisasi dan pengalaman akademik selama masa kuliah.
+          </p>
+          <div className="gallery-container">
+            <CircularGallery items={galleryItems} bend={3} textColor="#ffffff" />
           </div>
         </div>
       </div>

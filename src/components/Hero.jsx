@@ -34,6 +34,7 @@ const Hero = () => {
               revealDirection="start" 
               speed={300}
               revealMode="word"
+              replayInterval={5000}
             />
           </p>
 
