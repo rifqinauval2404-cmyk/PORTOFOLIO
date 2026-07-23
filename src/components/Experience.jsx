@@ -51,32 +51,28 @@ const organizationExperience = [
 
 const galleryItems = [
   {
-    image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=800&auto=format&fit=crop',
-    text: 'Webinar Leadership'
+    image: 'JahimDay.jpg',
+    text: 'HIMA IF'
   },
   {
-    image: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=800&auto=format&fit=crop',
-    text: 'Seminar Habit'
+    image: 'Pegabdian_Masyarakat.jpg',
+    text: 'Pegabdian Masyarakat'
   },
   {
-    image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=800&auto=format&fit=crop',
-    text: 'Divisi Logistik'
+    image: 'kwu.jpg',
+    text: 'Kewirausahaan'
   },
   {
-    image: 'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?q=80&w=800&auto=format&fit=crop',
-    text: 'Investpreneur Funding'
+    image: 'Ospek.jpg',
+    text: 'FORTRAN 2024 (Ospek)'
   },
   {
-    image: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=800&auto=format&fit=crop',
-    text: 'Fortran Tech Dev'
+    image: '/Investpreneur.jpg',
+    text: 'Investpreneur'
   },
   {
-    image: '/photo_juara.jpeg',
-    text: 'Achievement'
-  },
-  {
-    image: '/pototgg.png',
-    text: 'Campus Life'
+    image: '/KP_PLN.jpg',
+    text: 'Kerja Praktek PLTGU'
   }
 ]
 
