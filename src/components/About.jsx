@@ -46,14 +46,14 @@ const About = () => {
                   className="profile-card__photo"
                 />
                 <div className="profile-card__overlay">
-                  <h3 className="profile-card__name">M. Rifqi Nauval</h3>
-                  <p className="profile-card__subtitle">UI/UX & Frontend Developer</p>
+                  <h3 className="profile-card__name">M. Rifqi Nauval Nibroos</h3>
+                  
                 </div>
               </div>
 
               <div className="profile-card__details">
                 <div className="profile-card__detail-item">
-                  21 years old — UI/UX & Frontend Developer
+                  21 years old - UI/UX & Frontend Developer
                 </div>
                 <div className="profile-card__detail-item">
                   <b>Based in</b>

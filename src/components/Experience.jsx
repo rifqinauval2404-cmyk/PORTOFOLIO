@@ -21,12 +21,9 @@ const organizationExperience = [
   {
     id: 1,
     role: 'Anggota Divisi Pengembangan Karakter',
-    organization: 'Budi Pekerti ',
+    organization: 'Budi Pekerti',
     period: '2024 - 2025',
     description: 'Ketua Pelaksana Webinar “Developing Strong Character for Future Leaders” (2025). Bendahara Seminar “How improve A Good Habit” (2025) ',
-    size: 'large',
-    color: 'purple',
-    icon: '🚀',
   },
   {
     id: 2,
@@ -34,19 +31,14 @@ const organizationExperience = [
     organization: 'Intelekta',
     period: '2025',
     description: 'Bertanggung jawab atas pengelolaan inventaris, perlengkapan, dan logistik untuk seluruh kegiatan organisasi. Mengatur jadwal peminjaman dan memastikan ketersediaan alat untuk acara sekolah dan ekstrakurikuler.',
-    size: 'tall',
-    color: 'blue',
-    icon: '📢',
   },
   {
     id: 3,
     role: 'Anggota Divisi Sponsor dan Penggalangan dana.',
-    organization: 'Investprenereur ',
+    organization: 'Investprenereur',
     period: '2026 - Sekarang',
     description: 'Bertanggung jawab mencari pendanaan untuk kegiatan organisasi.',
-    size: 'small',
-    color: 'green',
-    icon: '💻',
+    live: true,
   },
   {
     id: 4,
@@ -54,9 +46,6 @@ const organizationExperience = [
     organization: 'Fortran',
     period: '2024',
     description: 'Anggota aktif dalam kegiatan Fortran yang bergerak dalam bidang teknologi, inovasi dan pengembangan karakter.',
-    size: 'small',
-    color: 'pink',
-    icon: '🎨',
   },
 ]
 
@@ -114,16 +103,6 @@ const Experience = () => {
     return () => observer.disconnect()
   }, [])
 
-  // Mouse spotlight hover effect logic
-  const handleMouseMove = (e) => {
-    const card = e.currentTarget
-    const rect = card.getBoundingClientRect()
-    const x = e.clientX - rect.left
-    const y = e.clientY - rect.top
-    card.style.setProperty('--x', `${x}px`)
-    card.style.setProperty('--y', `${y}px`)
-  }
-
   return (
     <section className="section" id="pengalaman" ref={sectionRef}>
       <div className="container">
@@ -178,33 +157,21 @@ const Experience = () => {
             {organizationExperience.map((item, i) => (
               <div
                 key={item.id}
-                className={`bento-card bento-card--${item.color} fade-in`}
+                className="bento-card fade-in"
                 style={{ transitionDelay: `${i * 0.1}s` }}
-                onMouseMove={handleMouseMove}
               >
                 <div className="bento-card__header">
-                  <div className="bento-card__icon-wrapper">
-                    {`0${i + 1}`}
-                  </div>
-                  <span className="bento-card__period">{item.period}</span>
+                  <div className="bento-card__mono">{`0${i + 1}`}</div>
+                  <span className={`bento-card__period ${item.live ? 'bento-card__period--live' : ''}`}>
+                    {item.period}
+                  </span>
                 </div>
 
                 <div className="bento-card__body">
-                  <h3 className="bento-card__role">{item.role}</h3>
                   <div className="bento-card__org">{item.organization}</div>
+                  <h3 className="bento-card__role">{item.role}</h3>
                   <p className="bento-card__desc">{item.description}</p>
                 </div>
-
-
-                {item.tags && item.tags.length > 0 && (
-                  <div className="bento-card__footer">
-                    {item.tags.map((tag) => (
-                      <span key={tag} className="bento-card__tag">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                )}
               </div>
             ))}
           </div>
