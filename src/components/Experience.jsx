@@ -4,10 +4,16 @@ import CircularGallery from './CircularGallery'
 
 const professionalExperience = [
   {
+    role: 'IT Support',
+    company: 'PT PLN (Persero) PLTGU Tanjung Batu',
+    period: '2026',
+    description: 'Membuat web sistem terintegrasi monitoring MCC untuk memudahkan pemantauan dan pengelolaan data, serta Membuat web untuk robot laser burung',
+  },
+  {
     role: 'Education & Documentation Coordinator',
     company: 'SMP TELKOM BANDUNG',
     period: '2026',
-    description: 'Melakukan analisis komparatif performa algoritma LSTM dan SVR untuk memprediksi harga saham dengan akurasi yang optimal.',
+    description: 'Mengedukasi siswa/i tentang penggunaan AI yang baik dan pencegahan Phising, serta mendokumentasikan kegiatan sekolah.',
   },
   {
     role: 'Data Entry',
