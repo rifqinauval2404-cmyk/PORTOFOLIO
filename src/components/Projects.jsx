@@ -12,14 +12,14 @@ const projects = [
       'Aplikasi manajemen keuangan pribadi. Memungkinkan pemantauan pengeluaran, pengaturan anggaran, dan analisis keuangan secara real-time.',
     tags: ['Web App', 'Finance', 'Dashboard', 'Keuangan', "Analisis"],
   },
-  {
-    id: 2,
-    icon: '📈',
-    image: '/SMB.jpeg', // User can replace this path
-    number: '02',
-    title: 'Smanda Belajar',
+ {
+    id: 6,
+    icon: '💰',
+    image: '/PHOTOCOFF_Logo.png', // User can replace this path
+    number: '06',
+    title: 'PHOTOCOFF',
     description:
-      'Aplikasi belajar berbasis Web. Mampu memfasilitasi pembelajaran yang lebih interaktif dan menyenangkan.',
+      'Platform untuk Photobooth dengan gaya yang modern dan aesthetic',
     tags: ['Web App', 'Web Design', 'UX/UI', 'Desain'],
   },
   {
@@ -52,14 +52,15 @@ const projects = [
       'Aplikasi manajemen keuangan yang dirancang khusus untuk keluarga. DuitFam memudahkan anggota keluarga dalam memantau pengeluaran bersama, dan melacak riwayat transaksi secara real-time. Dengan fitur-fitur intuitif.',
     tags: ['Web App', 'Web Design', 'UX/UI', 'Desain'],
   },
+  
   {
     id: 6,
-    icon: '💰',
-    image: '/PHOTOCOFF_Logo.png', // User can replace this path
-    number: '06',
-    title: 'PHOTOCOFF',
+    icon: '📈',
+    image: '/SMB.jpeg', // User can replace this path
+    number: '02',
+    title: 'Smanda Belajar',
     description:
-      'Platform untuk Photobooth dengan gaya yang modern dan aesthetic',
+      'Aplikasi belajar berbasis Web. Mampu memfasilitasi pembelajaran yang lebih interaktif dan menyenangkan.',
     tags: ['Web App', 'Web Design', 'UX/UI', 'Desain'],
   },
 ]
