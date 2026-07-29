@@ -328,6 +328,10 @@ main {
   display: none;
 }
 
+.navbar__mobile-menu {
+  display: none;
+}
+
 .navbar__overlay.open {
   display: block;
   position: fixed;
@@ -763,13 +767,25 @@ main {
   color: var(--text-light);
   transition: var(--transition-bounce);
   font-size: 1.1rem;
+.profile-card__social-link:hover {
+  transform: translateY(-3px);
+  border-color: transparent;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
 
-.profile-card__social-link:hover {
-  background: #ffffff;
-  color: var(--space-navy);
-  border-color: transparent;
-  transform: translateY(-3px);
+.profile-card__social-link--instagram:hover {
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  color: #ffffff;
+}
+
+.profile-card__social-link--linkedin:hover {
+  background: #0077b5;
+  color: #ffffff;
+}
+
+.profile-card__social-link--github:hover {
+  background: #24292e;
+  color: #ffffff;
 }
 
 /* Info Cards */
@@ -849,8 +865,9 @@ main {
 }
 
 .about__skill-tag:hover {
-  color: var(--text-white);
-  border-color: var(--skill-color, rgba(255, 255, 255, 0.2));
+  color: var(--skill-text-color, #ffffff);
+  border-color: var(--skill-color, rgba(255, 255, 255, 0.4));
+  box-shadow: 0 4px 20px var(--skill-color);
 }
 
 .about__skill-icon {
@@ -1270,9 +1287,9 @@ main {
 }
 
 /* Specific Brand Colors on Hover */
-.contact__link--email::before { background-color: #333333; }
-.contact__link--github::before { background-color: #1a1a1a; }
-.contact__link--linkedin::before { background-color: #444444; }
+.contact__link--email::before { background-color: #ea4335; }
+.contact__link--github::before { background-color: #24292e; }
+.contact__link--linkedin::before { background-color: #0077b5; }
 
 .contact__link-icon {
   display: flex;
@@ -1295,9 +1312,9 @@ main {
   border-color: #fff;
 }
 
-.contact__link--email:hover .contact__link-icon { color: #333333; }
-.contact__link--github:hover .contact__link-icon { color: #1a1a1a; }
-.contact__link--linkedin:hover .contact__link-icon { color: #444444; }
+.contact__link--email:hover .contact__link-icon { color: #ea4335; }
+.contact__link--github:hover .contact__link-icon { color: #24292e; }
+.contact__link--linkedin:hover .contact__link-icon { color: #0077b5; }
 
 .contact__link-text {
   position: absolute;

@@ -1,10 +1,19 @@
 import { useEffect, useRef } from 'react'
-import { FaInstagram, FaLinkedinIn, FaGithub } from 'react-icons/fa'
+import { FaInstagram, FaLinkedinIn, FaGithub, FaFigma, FaReact, FaPython, FaMicrosoft } from 'react-icons/fa'
+import { SiSpringboot } from 'react-icons/si'
+import { MdDesignServices } from 'react-icons/md'
+import { FaCode } from 'react-icons/fa6'
 import TypewriterText from './Animations/TypewriterText'
 import ScrollReveal from './Animations/ScrollReveal'
 
 const skills = [
-  'UI/UX Design', 'FrontEnd Dev', 'Figma', 'React', 'Spring Boot', 'Python', 'Ms. Office'
+  { name: 'UI/UX Design', icon: MdDesignServices, brandColor: '#FF4757', textColor: '#ffffff' },
+  { name: 'FrontEnd Dev', icon: FaCode, brandColor: '#00D2D3', textColor: '#000000' },
+  { name: 'Figma', icon: FaFigma, brandColor: '#F24E1E', textColor: '#ffffff' },
+  { name: 'React', icon: FaReact, brandColor: '#61DAFB', textColor: '#000000' },
+  { name: 'Spring Boot', icon: SiSpringboot, brandColor: '#6DB33F', textColor: '#ffffff' },
+  { name: 'Python', icon: FaPython, brandColor: '#3776AB', textColor: '#ffffff' },
+  { name: 'Ms. Office', icon: FaMicrosoft, brandColor: '#D83B01', textColor: '#ffffff' },
 ]
 
 const About = () => {
@@ -72,9 +81,9 @@ const About = () => {
               </div>
 
               <div className="profile-card__socials">
-                <a href="https://www.instagram.com/rifqinaufll_?igsh=MWxja25qMXZ4ZWVkcg%3D%3D&utm_source=qr" className="profile-card__social-link" title="Instagram"><FaInstagram /></a>
-                <a href="https://www.linkedin.com/in/muhammad-rifqi-nauval-nibroos-92538a3ab" className="profile-card__social-link" title="LinkedIn"><FaLinkedinIn /></a>
-                <a href="https://github.com/rifqinauval2404-cmyk" className="profile-card__social-link" title="GitHub"><FaGithub /></a>
+                <a href="https://www.instagram.com/rifqinaufll_?igsh=MWxja25qMXZ4ZWVkcg%3D%3D&utm_source=qr" className="profile-card__social-link profile-card__social-link--instagram" title="Instagram"><FaInstagram /></a>
+                <a href="https://www.linkedin.com/in/muhammad-rifqi-nauval-nibroos-92538a3ab" className="profile-card__social-link profile-card__social-link--linkedin" title="LinkedIn"><FaLinkedinIn /></a>
+                <a href="https://github.com/rifqinauval2404-cmyk" className="profile-card__social-link profile-card__social-link--github" title="GitHub"><FaGithub /></a>
 
               </div>
             </div>
@@ -91,24 +100,37 @@ const About = () => {
             </h2>
             <p className="about__intro">
               <ScrollReveal enableBlur={true} baseOpacity={0.8} baseRotation={0}>
-                As a student and a tech enthusiast, I spend most of my time exploring the latest innovations and learning through building. I’m driven by curiosity, always growing, and using this space to document my journey in the tech world.
+                As a student and a tech enthusiast, I spend most of my time exploring the latest innovations and learning through building. I'm driven by curiosity, always growing, and using this space to document my journey in the tech world.
               </ScrollReveal>
             </p>
             <p className="about__intro">
               <ScrollReveal enableBlur={true} baseOpacity={0.8} baseRotation={0}>
-                I’m a firm believer that the best growth happens through connection. Whether it's through social events or organizations, I love meeting new people and learning from diverse perspectives. Let’s connect and create something functional, impactful, and innovative together.
+                I'm a firm believer that the best growth happens through connection. Whether it's through social events or organizations, I love meeting new people and learning from diverse perspectives. Let's connect and create something functional, impactful, and innovative together.
               </ScrollReveal>
             </p>
 
             <div className="about__info-card" style={{ marginTop: '20px' }}>
               <div className="about__skills">
-                {skills.map((skill) => (
-                  <span key={skill} className="about__skill-tag">
-                    <ScrollReveal baseOpacity={0.8} enableBlur={true}>
-                      {skill}
-                    </ScrollReveal>
-                  </span>
-                ))}
+                {skills.map((skill) => {
+                  const IconComponent = skill.icon
+                  return (
+                    <span
+                      key={skill.name}
+                      className="about__skill-tag"
+                      style={{
+                        '--skill-color': skill.brandColor,
+                        '--skill-text-color': skill.textColor
+                      }}
+                    >
+                      <span className="about__skill-icon">
+                        <IconComponent />
+                      </span>
+                      <ScrollReveal baseOpacity={0.8} enableBlur={true}>
+                        {skill.name}
+                      </ScrollReveal>
+                    </span>
+                  )
+                })}
               </div>
             </div>
 

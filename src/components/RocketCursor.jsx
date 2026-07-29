@@ -154,7 +154,7 @@ const RocketCursor = () => {
           pointerEvents: 'none',
           zIndex: 9999,
           willChange: 'transform',
-          filter: 'drop-shadow(0 0 8px rgba(138, 100, 255, 0.4))',
+          filter: 'drop-shadow(0 0 8px rgba(255, 255, 255, 0.3))',
         }}
       >
         <svg
@@ -168,9 +168,9 @@ const RocketCursor = () => {
           {/* Rocket body */}
           <defs>
             <linearGradient id="rocketBody" x1="32" y1="4" x2="32" y2="48" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stopColor="#e8e0ff" />
-              <stop offset="50%" stopColor="#c8b8ff" />
-              <stop offset="100%" stopColor="#a088ee" />
+              <stop offset="0%" stopColor="#f0f0f0" />
+              <stop offset="50%" stopColor="#d8d8d8" />
+              <stop offset="100%" stopColor="#b8b8b8" />
             </linearGradient>
             <linearGradient id="rocketNose" x1="32" y1="2" x2="32" y2="18" gradientUnits="userSpaceOnUse">
               <stop offset="0%" stopColor="#ff8a64" />
@@ -178,7 +178,7 @@ const RocketCursor = () => {
             </linearGradient>
             <linearGradient id="rocketWindow" x1="32" y1="20" x2="32" y2="30" gradientUnits="userSpaceOnUse">
               <stop offset="0%" stopColor="#a8d8ff" />
-              <stop offset="100%" stopColor="#64a0ff" />
+              <stop offset="100%" stopColor="#999999" />
             </linearGradient>
             <linearGradient id="rocketFlame" x1="32" y1="46" x2="32" y2="62" gradientUnits="userSpaceOnUse">
               <stop offset="0%" stopColor="#ffcc40" />
@@ -188,9 +188,9 @@ const RocketCursor = () => {
           </defs>
 
           {/* Left fin */}
-          <path d="M18 38L12 50L22 44Z" fill="#8a64ff" opacity="0.9" />
+          <path d="M18 38L12 50L22 44Z" fill="#cccccc" opacity="0.9" />
           {/* Right fin */}
-          <path d="M46 38L52 50L42 44Z" fill="#8a64ff" opacity="0.9" />
+          <path d="M46 38L52 50L42 44Z" fill="#cccccc" opacity="0.9" />
 
           {/* Rocket body */}
           <path d="M24 44C24 44 24 18 32 6C40 18 40 44 40 44H24Z" fill="url(#rocketBody)" />
@@ -200,16 +200,16 @@ const RocketCursor = () => {
 
           {/* Window */}
           <circle cx="32" cy="26" r="5" fill="url(#rocketWindow)" />
-          <circle cx="32" cy="26" r="5" fill="none" stroke="#e8e0ff" strokeWidth="1.2" />
+          <circle cx="32" cy="26" r="5" fill="none" stroke="#f0f0f0" strokeWidth="1.2" />
           {/* Window shine */}
           <circle cx="30.5" cy="24.5" r="1.5" fill="rgba(255,255,255,0.6)" />
 
           {/* Body stripes */}
-          <rect x="26" y="36" width="12" height="2" rx="1" fill="#8a64ff" opacity="0.4" />
-          <rect x="27" y="40" width="10" height="1.5" rx="0.75" fill="#8a64ff" opacity="0.3" />
+          <rect x="26" y="36" width="12" height="2" rx="1" fill="#cccccc" opacity="0.4" />
+          <rect x="27" y="40" width="10" height="1.5" rx="0.75" fill="#cccccc" opacity="0.3" />
 
           {/* Bottom cap */}
-          <path d="M24 44H40L38 46H26L24 44Z" fill="#7a54df" />
+          <path d="M24 44H40L38 46H26L24 44Z" fill="#aaaaaa" />
 
           {/* Flame */}
           <path d="M27 46L32 60L37 46" fill="url(#rocketFlame)" opacity="0.9">

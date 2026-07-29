@@ -7,7 +7,7 @@ const Footer = () => {
     <footer className="footer">
       <FireworksBackground
         population={2}
-        color={['#8a64ff', '#64a0ff', '#c084fc', '#ff8a64']}
+        color={['#ffffff', '#cccccc', '#aaaaaa', '#dddddd']}
         fireworkSpeed={{ min: 4, max: 8 }}
         fireworkSize={{ min: 2, max: 5 }}
         particleSpeed={{ min: 2, max: 7 }}
