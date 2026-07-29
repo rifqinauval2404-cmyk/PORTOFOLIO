@@ -23,15 +23,15 @@ const Hero = () => {
         {/* Left Side: Content */}
         <div className="hero__content">
           <div className="hero__badge">
-            <span className="hero__badge-dot" />
+
             UI/UX & Frontend Developer
           </div>
 
           <p className="hero__name">
-            <DecryptedText 
-              text="M. Rifqi Nauval Nibroos" 
-              animateOn="view" 
-              revealDirection="start" 
+            <DecryptedText
+              text="M. Rifqi Nauval Nibroos"
+              animateOn="view"
+              revealDirection="start"
               speed={300}
               revealMode="word"
               replayInterval={5000}

@@ -47,7 +47,7 @@ const About = () => {
                 />
                 <div className="profile-card__overlay">
                   <h3 className="profile-card__name">M. Rifqi Nauval Nibroos</h3>
-                  
+
                 </div>
               </div>
 
@@ -83,7 +83,7 @@ const About = () => {
           {/* Right Column - Intro & Skills */}
           <div className="about__right fade-in-right">
             <div className="section-label">
-              <span className="section-label__dot" />
+
               about me
             </div>
             <h2 className="section-title">

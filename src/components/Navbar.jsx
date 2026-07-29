@@ -37,6 +37,16 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => { document.body.style.overflow = '' }
+  }, [menuOpen])
+
   const handleNavClick = (e, id) => {
     e.preventDefault()
     setMenuOpen(false)
@@ -54,7 +64,8 @@ const Navbar = () => {
           RN
         </div>
 
-        <Dock className={`navbar__links ${menuOpen ? 'open' : ''}`}>
+        {/* Desktop links (Dock animation) */}
+        <Dock className="navbar__links">
           {navLinks.map(link => (
             <DockItem
               key={link.id}
@@ -78,6 +89,21 @@ const Navbar = () => {
         </button>
       </div>
 
+      {/* Mobile menu - rendered OUTSIDE pill for correct positioning */}
+      <div className={`navbar__mobile-menu ${menuOpen ? 'open' : ''}`}>
+        {navLinks.map(link => (
+          <a
+            key={link.id}
+            href={`#${link.id}`}
+            className={`navbar__mobile-link ${activeSection === link.id ? 'active' : ''}`}
+            onClick={(e) => handleNavClick(e, link.id)}
+          >
+            {link.label}
+          </a>
+        ))}
+      </div>
+
+      {/* Overlay */}
       <div
         className={`navbar__overlay ${menuOpen ? 'open' : ''}`}
         onClick={() => setMenuOpen(false)}
