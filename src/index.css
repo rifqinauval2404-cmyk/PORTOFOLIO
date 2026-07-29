@@ -564,6 +564,11 @@ main {
   }
 }
 
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
 /* ============================================
    ABOUT SECTION - Asymmetric Layout
    ============================================ */
@@ -767,6 +772,8 @@ main {
   color: var(--text-light);
   transition: var(--transition-bounce);
   font-size: 1.1rem;
+}
+
 .profile-card__social-link:hover {
   transform: translateY(-3px);
   border-color: transparent;
@@ -1412,18 +1419,6 @@ main {
   color: var(--accent-rose);
   display: inline-block;
   animation: heartbeat 1.5s ease-in-out infinite;
-}
-
-@keyframes heartbeat {
-
-  0%,
-  100% {
-    transform: scale(1);
-  }
-
-  50% {
-    transform: scale(1.2);
-  }
 }
 
 .footer__links {
