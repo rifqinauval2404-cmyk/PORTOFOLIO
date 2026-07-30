@@ -42,13 +42,7 @@ const Footer = () => {
 
           {/* Kanan: nav di atas, ikon sosial di bawahnya */}
           <div className="footer__content">
-            <nav className="footer__nav">
-              {navLinks.map((link) => (
-                <a key={link.id} href={`#${link.id}`} className="footer__nav-link">
-                  {link.label}
-                </a>
-              ))}
-            </nav>
+           
 
             <div className="footer__socials">
               {socials.map((social) => (
@@ -72,7 +66,6 @@ const Footer = () => {
           <p className="footer__copyright">
             © {year} M. Rifqi Nauval Nibroos. All rights reserved.
           </p>
-          <p className="footer__text">rifqinauval2404@gmail.com - to infinity and beyond</p>
         </div>
       </div>
     </footer>

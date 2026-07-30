@@ -234,39 +234,72 @@ Ikon sosialnya kecil (18px) dan tanpa lingkaran.
 
 ### Adaptasi ke tema kita
 
-- Struktur `space-between` (brand kiri / nav + sosial kanan) **diadopsi**.
-- **Baris nav di footer wajib ada.** Sempat saya hilangkan dengan alasan "duplikat navbar" — itu keliru,
-  pemilik proyek memang mau layout gambar referensi apa adanya: `.footer__nav` di kanan atas, lalu
-  `.footer__socials` **di bawahnya** (bukan sebaris dengan brand). Itu sebabnya `.footer__top` pakai
-  `align-items: flex-start` dan ada wrapper `.footer__content` yang `flex-direction: column;
-  align-items: flex-end`. Isinya About / Experience / Projects / Contact → id `tentang`, `pengalaman`,
-  `proyek`, `kontak`.
-- Baris copyright + kredit terpisah di bawah **diadopsi**, ditumpuk rata kiri (`flex-direction: column`),
-  bukan `space-between`.
+- Struktur `space-between` (brand kiri / sosial kanan) **diadopsi**.
+- **Baris nav footer: TIDAK dipakai.** Referensi punya `.footer-nav` (About/Work/Blog/Contact) dan sempat
+  saya pasang, tapi pemilik proyek menghapusnya sendiri dari `Footer.jsx`. Jadi footer kita = brand kiri
+  + ikon sosial kanan + copyright, tanpa nav. Wrapper `.footer__content` tetap ada (masih membungkus
+  ikon), begitu juga CSS `.footer__nav` / `.footer__nav-link` — biarkan, siap dipakai kalau berubah
+  pikiran. **Jangan pasang ulang nav-nya tanpa diminta.**
+- Baris copyright di bawah **diadopsi**, rata kiri (`flex-direction: column`), bukan `space-between`.
+  Tagline "to infinity and beyond" juga dihapus pemilik proyek dari baris ini.
 - Ikon sosial tetap **berlingkaran glass** (bukan svg telanjang seperti referensi) supaya nyambung
-  dengan bahasa visual kartu kita — tapi diperkecil jadi **40px** (dari 140px versi lama di section
-  Contact).
+  dengan bahasa visual kartu kita. Ukuran: **60px, ikon `1.4rem`**, gap `14px`. Sempat 38px lalu 40px —
+  dua-duanya ditolak pemilik proyek karena kekecilan. **Jangan diperkecil lagi tanpa diminta.**
 - **Animasi hover-nya wajib pakai pola `.contact__link` versi lama**, bukan hover polos: pseudo-element
   `::before` berisi lingkaran warna brand (`#0077b5` LinkedIn, `#24292e` GitHub) yang naik dari bawah
   (`bottom:-150%`, `scale(0) → scale(1)`, `transform .6s cubic-bezier(.19,1,.22,1)`), ikon berubah jadi
-  putih, plus `translateY(-3px)`. Ini permintaan eksplisit pemilik proyek — animasinya "yang sebelumnya",
-  hanya skalanya yang diperkecil. Label teks dan `translateY(-20px)` pada ikon **dibuang** karena tidak
-  muat di lingkaran 40px.
+  putih, plus `translateY(-3px)`. Ini permintaan eksplisit pemilik proyek — animasinya "yang sebelumnya".
+  Label teks dan `translateY(-20px)` pada ikon **dibuang** karena tidak muat di lingkaran sekecil itu.
 - `FireworksBackground` yang sudah ada **dipertahankan** — itu identitas footer kita.
 
 ## A.4b Project Card — kartunya yang kotak, bukan gambarnya
 
-**Catatan revisi:** awalnya ini saya terapkan salah sasaran — yang saya buat "kotak" adalah panel
-gambarnya (`aspect-ratio: 4/3`). Yang dimaksud pemilik proyek adalah **kartunya** (`.project-card`,
-si box panjang), mengikuti kartu "Featured Work" referensi yang bersudut siku.
+**Catatan revisi (2×):** ini dua kali salah sasaran sebelum benar.
+(1) Pertama saya kotakkan panel *gambarnya* (`aspect-ratio: 4/3`) — padahal yang dimaksud adalah
+**kartunya**. (2) Lalu saya cuma set `border-radius: 0` tanpa mengubah proporsi, jadi kartunya masih
+"panjang ke bawah" dan belum menyerupai referensi. Yang benar: ikut struktur `.card` referensi utuh.
 
-| Aspek | Nilai | Alasan |
+Inilah CSS asli kartu "Featured Work" referensi (diekstrak dari bundle produksinya), yang jadi acuan:
+
+```css
+.grid        { display:grid; grid-template-columns:repeat(3,1fr); gap:30px }
+.card        { border:1px solid var(--border); display:flex; flex-direction:column;
+               flex:1; height:100%; overflow:hidden }   /* ← tanpa border-radius */
+.card:hover  { transform:translateY(-8px); box-shadow:0 20px 40px #0000000d }
+.card-image  { width:100%; height:240px; object-fit:cover }
+.card-content{ display:flex; flex-direction:column; flex:1; padding:24px }
+.card-tag    { text-transform:uppercase; letter-spacing:1px; font-size:12px; margin-bottom:12px }
+.card-title  { font-size:18px; font-weight:700; margin-bottom:10px }
+.card-desc   { font-size:14px; line-height:1.5 }
+```
+
+Tiga hal yang bikin kartu referensi terlihat **kotak & padat**, dan semuanya sekarang kita ikuti:
+
+1. **`border-radius: 0`** — kartunya benar-benar siku. Ini **pengecualian resmi terhadap skala radius
+   §4**, diminta langsung pemilik proyek. Jangan dikembalikan ke `--radius-lg`/`--radius-md`.
+2. **Grid 3 kolom tetap + gap 30px** — bukan `repeat(auto-fit, minmax(320px,1fr))` seperti kode lama.
+   `auto-fit` bikin jumlah kolom berubah-ubah dan kartunya jadi sempit-tinggi.
+3. **`flex:1` + `height:100%`** di kartu dan `__content` — semua kartu dalam satu baris jadi sama
+   tinggi, tidak lagi bergerigi mengikuti panjang deskripsi masing-masing.
+
+| Aspek | Nilai kita | Catatan |
 |---|---|---|
-| `border-radius` kartu | **`0`** | Ini yang bikin kartunya "kotak". **Pengecualian resmi terhadap skala radius §4** — diminta langsung pemilik proyek, jangan dikembalikan ke `--radius-lg`. |
-| `border-radius` tag | tetap `--radius-full` | pil di dalam kartu siku itu justru pola referensi juga (`.project-list-tag` radius 20px) — bukan inkonsistensi |
-| tinggi panel gambar | `height: 200px` | tetap seperti semula. `aspect-ratio` sempat dicoba tapi bikin kartu kepanjangan di kolom sempit/mobile. |
-| `object-fit` | `contain` + `padding: 22px` | **wajib** — isi kartu kita *logo*, bukan foto mockup seperti referensi. `cover` (yang dipakai kode lama, menyimpang dari dokumen) memotong logonya. Ini menegakkan §6. |
+| tinggi panel gambar | `240px` (mobile `200px`) | angka `.card-image` referensi |
+| `object-fit` | `contain` + `padding: 26px` | **wajib** — isi kartu kita *logo*, bukan foto mockup. `cover` (kode lama, menyimpang dari §6) memotong logonya. |
+| title | `1.125rem` (=18px) | turun dari `1.3rem`; ikut `.card-title` |
+| description | `0.875rem` / `line-height 1.5` | ikut `.card-desc`; turun dari `0.9rem`/`1.8` |
+| description clamp | `-webkit-line-clamp: 3` | **tambahan kita, bukan dari referensi.** Deskripsi referensi kebetulan pendek semua; punya kita ada yang 40 kata (Salur-in). Tanpa clamp, satu kartu panjang menarik tinggi seluruh barisnya. |
 | hover gambar | `scale(1.06)` | diturunkan dari `1.1` karena `contain` + padding bikin `1.1` menabrak tepi panel |
+
+### Yang dihapus dari tampilan kartu
+
+Mengikuti gambar referensi, dua elemen ini **tidak dirender lagi** — tapi datanya tetap utuh di
+`Projects.jsx`, jadi gampang dihidupkan ulang:
+
+- **Tag pill** (`.project-card__tags`) → diganti **satu label kategori** `.project-card__category`
+  yang isinya `project.tags[0]`, setara `.card-tag` referensi. Pill 4–5 buah yang wrap ke 2 baris itu
+  penyumbang tinggi terbesar. CSS `.project-card__tag` sengaja dibiarkan di `index.css`.
+- **Nomor** (`01`, `02`, …) → slotnya dipakai label kategori. Field `number` masih ada di data.
 
 Yang **tidak** diambil dari kartu referensi: `filter: grayscale(1)` → warna saat hover. Efek itu bagus
 untuk foto, tapi logo brand yang di-grayscale jadi tidak terbaca. Kalau nanti isi kartu diganti jadi
