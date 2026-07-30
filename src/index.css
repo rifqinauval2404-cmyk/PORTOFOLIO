@@ -47,6 +47,13 @@
   --surface-panel: rgba(255, 255, 255, 0.06);
   --surface-panel-border: rgba(255, 255, 255, 0.08);
 
+  /* Field form — putih 6% yang SAMA seperti navbar, tapi dikomposit di atas
+     --space-void, bukan di atas kartu. Kalau pakai --surface-panel langsung,
+     6% putih itu menumpuk di atas --surface-card yang bernuansa navy, jadi
+     field-nya ikut kebiruan dan tidak pernah sewarna navbar. */
+  --surface-field: linear-gradient(rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.06)), var(--space-void);
+  --surface-field-focus: linear-gradient(rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.11)), var(--space-void);
+
   /* Gradients */
   --gradient-space: linear-gradient(180deg, #000000 0%, #050510 30%, #0a0a1a 60%, #080816 100%);
   --gradient-accent: linear-gradient(135deg, #ffffff 0%, #cccccc 100%);
@@ -526,6 +533,68 @@ main {
   width: 24px;
   height: 24px;
   color: var(--text-dim);
+}
+
+/* ============================================
+   MARQUEE (diadaptasi dari referensi aziziem.xyz)
+   Pita miring di bawah hero. Warnanya dibalik: putih solid + teks navy,
+   mengikuti aturan "primary = putih solid" di design.md §2.
+   ============================================ */
+.marquee {
+  position: relative;
+  z-index: 2;
+  width: 104vw;
+  margin-left: -2vw;
+  padding: 16px 0;
+  overflow: hidden;
+  background: #ffffff;
+  transform: rotate(-2deg);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+}
+
+.marquee__content {
+  display: flex;
+  width: fit-content;
+  animation: marquee-scroll 30s linear infinite;
+}
+
+.marquee:hover .marquee__content {
+  animation-play-state: paused;
+}
+
+.marquee__half {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  padding: 0 20px;
+  white-space: nowrap;
+}
+
+.marquee__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 40px;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--space-navy);
+}
+
+.marquee__dot {
+  font-size: 1.2rem;
+  color: var(--text-dim);
+  opacity: 0.7;
+}
+
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 @keyframes fadeIn {
@@ -1098,10 +1167,12 @@ main {
   gap: 24px;
 }
 
+/* Kartunya bersudut siku (radius 0) mengikuti kartu "Featured Work" referensi.
+   Ini pengecualian yang diminta pemilik proyek terhadap skala radius §4 — lihat §A.4b. */
 .project-card {
   background: var(--surface-panel);
   border: 1px solid var(--surface-panel-border);
-  border-radius: var(--radius-lg);
+  border-radius: 0;
   position: relative;
   overflow: hidden;
   transition: var(--transition-smooth);
@@ -1134,9 +1205,13 @@ main {
   opacity: 1;
 }
 
+/* Tinggi tetap 200px (bukan aspect-ratio) supaya kartu tidak jadi kepanjangan
+   di kolom sempit. object-fit: contain + padding sesuai design.md §6,
+   karena isinya logo, bukan foto: `cover` akan memotong logonya. */
 .project-card__image-container {
   width: 100%;
   height: 200px;
+  padding: 22px;
   overflow: hidden;
   position: relative;
   background: rgba(255, 255, 255, 0.03);
@@ -1149,12 +1224,12 @@ main {
 .project-card__img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   transition: transform 0.8s cubic-bezier(0.2, 0, 0.2, 1);
 }
 
 .project-card:hover .project-card__img {
-  transform: scale(1.1);
+  transform: scale(1.06);
 }
 
 .project-card__content {
@@ -1314,6 +1389,8 @@ main {
   color: var(--text-white);
 }
 
+/* Warna field = warna navbar. Border & shadow-nya juga disamakan dengan
+   .navbar__pill. Tidak perlu backdrop-filter karena --surface-field sudah opaque. */
 .contact-form__field input,
 .contact-form__field textarea {
   width: 100%;
@@ -1321,9 +1398,10 @@ main {
   font-family: inherit;
   font-size: 0.95rem;
   color: var(--text-white);
-  background: var(--surface-glass);
-  border: 1px solid var(--surface-card-border);
+  background: var(--surface-field);
+  border: 1px solid var(--surface-panel-border);
   border-radius: var(--radius-sm);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
   outline: none;
   transition: var(--transition-smooth);
 }
@@ -1335,7 +1413,7 @@ main {
 
 .contact-form__field input:focus,
 .contact-form__field textarea:focus {
-  background: var(--surface-glass-hover);
+  background: var(--surface-field-focus);
   border-color: var(--surface-card-border-hover);
 }
 
@@ -1351,7 +1429,7 @@ main {
 .contact-form__field input:-webkit-autofill:focus {
   -webkit-text-fill-color: var(--text-white);
   caret-color: var(--text-white);
-  -webkit-box-shadow: 0 0 0 1000px var(--space-indigo) inset;
+  -webkit-box-shadow: 0 0 0 1000px #0f0f0f inset;
   transition: background-color 9999s ease-out;
 }
 
@@ -1446,13 +1524,36 @@ main {
   z-index: 10;
 }
 
-/* Baris atas: brand di kiri, ikon sosial rata kanan */
+/* Baris atas: brand di kiri; nav + ikon sosial rata kanan, ikon di bawah nav */
 .footer__top {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   flex-wrap: wrap;
   gap: 20px;
+}
+
+.footer__content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 18px;
+}
+
+.footer__nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.footer__nav-link {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  transition: color 0.3s ease;
+}
+
+.footer__nav-link:hover {
+  color: var(--text-white);
 }
 
 .footer__brand {
@@ -1471,36 +1572,67 @@ main {
   gap: 12px;
 }
 
+/* Animasi hover-nya sama seperti .contact__link versi lama:
+   lingkaran warna brand naik dari bawah + ikon jadi putih. Hanya skalanya diperkecil. */
 .footer__social {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 38px;
-  height: 38px;
+  width: 40px;
+  height: 40px;
   font-size: 0.95rem;
   color: var(--text-muted);
   background: var(--surface-glass);
   border: 1px solid var(--surface-card-border);
   border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  cursor: pointer;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  transition: var(--transition-smooth);
+  transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
-.footer__social:hover {
-  color: var(--text-white);
-  background: var(--surface-glass-hover);
-  border-color: var(--surface-card-border-hover);
-  transform: translateY(-2px);
+.footer__social::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -150%;
+  width: 300%;
+  height: 300%;
+  border-radius: 50%;
+  transform: translateX(-50%) scale(0);
+  transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+  z-index: -1;
 }
 
-/* Baris bawah: copyright + tagline */
+.footer__social:hover::before {
+  transform: translateX(-50%) scale(1);
+}
+
+.footer__social--linkedin::before { background-color: #0077b5; }
+.footer__social--github::before { background-color: #24292e; }
+
+.footer__social:active {
+  transform: scale(0.95);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .footer__social:hover {
+    color: var(--text-white);
+    border-color: var(--surface-card-border-hover);
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-3px);
+  }
+}
+
+/* Baris bawah: copyright + tagline, ditumpuk rata kiri (mengikuti gambar referensi) */
 .footer__bottom {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 10px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
   padding-top: 24px;
   border-top: 1px solid var(--surface-card-border);
 }
@@ -1713,6 +1845,21 @@ main {
     padding: 28px 24px;
   }
 
+  /* Marquee mobile */
+  .marquee {
+    padding: 12px 0;
+  }
+
+  .marquee__item {
+    gap: 24px;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+  }
+
+  .marquee__half {
+    gap: 24px;
+  }
+
   /* Contact mobile */
   .contact__grid {
     grid-template-columns: 1fr;
@@ -1738,10 +1885,16 @@ main {
 
   /* Footer mobile */
   .footer__top,
+  .footer__content,
   .footer__bottom {
     flex-direction: column;
     align-items: center;
     text-align: center;
+  }
+
+  .footer__nav {
+    justify-content: center;
+    gap: 20px;
   }
 }
 
@@ -1771,6 +1924,13 @@ main {
 
   .contact-form {
     padding: 32px 28px;
+  }
+}
+
+/* ---------- Reduced Motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .marquee__content {
+    animation: none;
   }
 }
 

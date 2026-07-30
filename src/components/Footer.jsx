@@ -1,6 +1,13 @@
 import { FaGithub, FaLinkedinIn } from 'react-icons/fa'
 import { FireworksBackground } from './FireworksBackground'
 
+const navLinks = [
+  { id: 'tentang', label: 'About' },
+  { id: 'pengalaman', label: 'Experience' },
+  { id: 'proyek', label: 'Projects' },
+  { id: 'kontak', label: 'Contact' },
+]
+
 const socials = [
   {
     id: 'linkedin',
@@ -33,20 +40,31 @@ const Footer = () => {
         <div className="footer__top">
           <div className="footer__brand">M. Rifqi Nauval N.</div>
 
-          <div className="footer__socials">
-            {socials.map((social) => (
-              <a
-                key={social.id}
-                href={social.href}
-                className={`footer__social footer__social--${social.id}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={social.label}
-                title={social.label}
-              >
-                {social.icon}
-              </a>
-            ))}
+          {/* Kanan: nav di atas, ikon sosial di bawahnya */}
+          <div className="footer__content">
+            <nav className="footer__nav">
+              {navLinks.map((link) => (
+                <a key={link.id} href={`#${link.id}`} className="footer__nav-link">
+                  {link.label}
+                </a>
+              ))}
+            </nav>
+
+            <div className="footer__socials">
+              {socials.map((social) => (
+                <a
+                  key={social.id}
+                  href={social.href}
+                  className={`footer__social footer__social--${social.id}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={social.label}
+                  title={social.label}
+                >
+                  {social.icon}
+                </a>
+              ))}
+            </div>
           </div>
         </div>
 

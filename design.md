@@ -57,6 +57,7 @@ Supaya efek glass terlihat "clean" bukan berantakan:
 ## 7. Motion / Animasi
 
 - Animasi scroll-reveal (`fade-in`, `fade-in-left`, dst) sudah dipakai di hampir semua section — **jangan tambah jenis animasi baru** tanpa alasan kuat, karena makin banyak jenis gerakan berbeda dalam satu scroll, makin ramai/tidak "clean".
+  - **Pengecualian yang sudah disetujui:** marquee di bawah hero (lihat §A.4c). Diminta langsung oleh pemilik proyek. Jangan dihapus dengan alasan aturan ini.
 - Durasi transisi standar sudah ada: `--transition-smooth` (0.4s) dan `--transition-bounce` (0.5s, untuk elemen interaktif seperti tombol). Pakai salah satu dari ini, jangan bikin timing custom baru per komponen.
 
 ## 8. Checklist sebelum menambah komponen baru
@@ -185,13 +186,34 @@ CSS kuncinya:
 | Baris Name + Email berdampingan | ✅ | `.contact-form__row` grid `1fr 1fr` |
 | Honeypot anti-spam | ✅ | field tersembunyi, dibuang sebelum submit |
 | Panel form flat + border tipis | ⚠️ diubah | wajib **glass**: `--surface-card` + border + `blur(16px)` (§5) |
+| Input `background:#fff` | ⚠️ diubah | **field wajib sewarna navbar** — keputusan eksplisit pemilik proyek. Pakai `--surface-field`, jangan `--surface-panel` langsung (lihat jebakan di bawah). Border `--surface-panel-border`, shadow `0 4px 30px rgba(0,0,0,.3)` — dua-duanya sama dengan `.navbar__pill`. Focus: `--surface-field-focus` + `--surface-card-border-hover`. |
 | Padding form `48px` | ⚠️ diubah | `40px` — menyesuaikan `--container-max: 1100px` kita yang lebih sempit |
 | Sudut siku (radius 0) | ❌ ditolak | pakai skala §4: `--radius-lg` panel, `--radius-sm` input |
 | Tombol hitam solid | ⚠️ dibalik | **putih solid** + teks `--space-navy` (§2, aturan wajib) |
 | Hover tombol `opacity:.9` | ❌ ditolak | pakai pola kita: `translateY(-2px)` + shadow membesar |
 | Font `Geist` | ❌ ditolak | tetap `Montserrat` |
 | Heading "Let's Work Together" statis | ❌ ditolak | pertahankan `<RotatingText>` Work↔Build yang sudah ada |
-| Marquee miring `rotate(-2deg)` | ❌ ditolak | terlalu ramai, melanggar prinsip "clean" |
+
+### Jebakan: kenapa `--surface-panel` tidak cukup untuk field
+
+Ini pernah salah sekali, jadi dicatat. Awalnya field diberi `background: var(--surface-panel)`
+(putih 6%, persis deklarasi `.navbar__pill`) tapi hasilnya **tetap tidak sewarna navbar** — kelihatan
+kebiruan. Penyebabnya bukan nilai alpha-nya, tapi **apa yang ada di belakangnya**:
+
+- `.navbar__pill` → putih 6% menumpuk di atas `--space-void` (hitam) ⇒ hasilnya **abu netral**.
+- field form → putih 6% menumpuk di atas `.contact-form` yang `--surface-card: rgba(15,15,30,.6)`
+  ⇒ hasilnya **abu bernuansa navy**.
+
+Solusinya: `--surface-field` memaksa komposit ulang di atas void, bukan di atas kartu:
+
+```css
+--surface-field: linear-gradient(rgba(255,255,255,.06), rgba(255,255,255,.06)), var(--space-void);
+```
+
+Karena `--surface-field` sudah opaque, `backdrop-filter` pada field **tidak perlu** (tidak ada efeknya).
+Kalau nanti mau field lebih terang, naikkan dua angka `.06` itu — jangan tambahkan warna baru.
+Override `:-webkit-autofill` juga harus pakai netral (`#0f0f0f`), bukan `--space-indigo`, kalau tidak
+field yang di-autofill akan balik kebiruan.
 
 ## A.4 Layout Footer — **ini yang kita adopsi**
 
@@ -213,17 +235,80 @@ Ikon sosialnya kecil (18px) dan tanpa lingkaran.
 ### Adaptasi ke tema kita
 
 - Struktur `space-between` (brand kiri / nav + sosial kanan) **diadopsi**.
-- Baris copyright + kredit terpisah di bawah **diadopsi**.
+- **Baris nav di footer wajib ada.** Sempat saya hilangkan dengan alasan "duplikat navbar" — itu keliru,
+  pemilik proyek memang mau layout gambar referensi apa adanya: `.footer__nav` di kanan atas, lalu
+  `.footer__socials` **di bawahnya** (bukan sebaris dengan brand). Itu sebabnya `.footer__top` pakai
+  `align-items: flex-start` dan ada wrapper `.footer__content` yang `flex-direction: column;
+  align-items: flex-end`. Isinya About / Experience / Projects / Contact → id `tentang`, `pengalaman`,
+  `proyek`, `kontak`.
+- Baris copyright + kredit terpisah di bawah **diadopsi**, ditumpuk rata kiri (`flex-direction: column`),
+  bukan `space-between`.
 - Ikon sosial tetap **berlingkaran glass** (bukan svg telanjang seperti referensi) supaya nyambung
-  dengan bahasa visual kartu kita — tapi diperkecil jadi **38px** (dari 140px versi lama di section
-  Contact), dengan ikon 15px. Hover: border menguat + `translateY(-2px)`, tanpa warna brand.
+  dengan bahasa visual kartu kita — tapi diperkecil jadi **40px** (dari 140px versi lama di section
+  Contact).
+- **Animasi hover-nya wajib pakai pola `.contact__link` versi lama**, bukan hover polos: pseudo-element
+  `::before` berisi lingkaran warna brand (`#0077b5` LinkedIn, `#24292e` GitHub) yang naik dari bawah
+  (`bottom:-150%`, `scale(0) → scale(1)`, `transform .6s cubic-bezier(.19,1,.22,1)`), ikon berubah jadi
+  putih, plus `translateY(-3px)`. Ini permintaan eksplisit pemilik proyek — animasinya "yang sebelumnya",
+  hanya skalanya yang diperkecil. Label teks dan `translateY(-20px)` pada ikon **dibuang** karena tidak
+  muat di lingkaran 40px.
 - `FireworksBackground` yang sudah ada **dipertahankan** — itu identitas footer kita.
+
+## A.4b Project Card — kartunya yang kotak, bukan gambarnya
+
+**Catatan revisi:** awalnya ini saya terapkan salah sasaran — yang saya buat "kotak" adalah panel
+gambarnya (`aspect-ratio: 4/3`). Yang dimaksud pemilik proyek adalah **kartunya** (`.project-card`,
+si box panjang), mengikuti kartu "Featured Work" referensi yang bersudut siku.
+
+| Aspek | Nilai | Alasan |
+|---|---|---|
+| `border-radius` kartu | **`0`** | Ini yang bikin kartunya "kotak". **Pengecualian resmi terhadap skala radius §4** — diminta langsung pemilik proyek, jangan dikembalikan ke `--radius-lg`. |
+| `border-radius` tag | tetap `--radius-full` | pil di dalam kartu siku itu justru pola referensi juga (`.project-list-tag` radius 20px) — bukan inkonsistensi |
+| tinggi panel gambar | `height: 200px` | tetap seperti semula. `aspect-ratio` sempat dicoba tapi bikin kartu kepanjangan di kolom sempit/mobile. |
+| `object-fit` | `contain` + `padding: 22px` | **wajib** — isi kartu kita *logo*, bukan foto mockup seperti referensi. `cover` (yang dipakai kode lama, menyimpang dari dokumen) memotong logonya. Ini menegakkan §6. |
+| hover gambar | `scale(1.06)` | diturunkan dari `1.1` karena `contain` + padding bikin `1.1` menabrak tepi panel |
+
+Yang **tidak** diambil dari kartu referensi: `filter: grayscale(1)` → warna saat hover. Efek itu bagus
+untuk foto, tapi logo brand yang di-grayscale jadi tidak terbaca. Kalau nanti isi kartu diganti jadi
+screenshot/mockup (bukan logo), grayscale ini baru layak dipertimbangkan — sekalian dengan `cover`.
+
+## A.4c Marquee — pita miring di bawah hero
+
+**Catatan revisi:** di draf pertama dokumen ini marquee saya tolak dengan alasan "terlalu ramai".
+Pemilik proyek meminta elemen ini **secara eksplisit**, jadi statusnya sekarang **diadopsi**. Jangan
+hapus dengan alasan §7 ("jangan tambah animasi baru") — ini pengecualian yang disetujui pemilik, dan
+satu-satunya animasi baru yang boleh masuk tanpa diskusi ulang.
+
+Penempatan: langsung **setelah `<Hero />`, sebelum `<About />`** di `src/App.jsx` — sama seperti posisi
+di referensi (setelah hero, sebelum "Featured Work"). Bukan di dalam `.hero`, karena `.hero__container`
+itu grid 2 kolom dan pita full-bleed akan merusaknya.
+
+| Aspek | Referensi | Punya kita | Alasan |
+|---|---|---|---|
+| Background | `--accent: #000` | `#ffffff` | **dibalik** — halaman kita gelap; putih solid juga aturan "primary" §2 |
+| Warna teks | `#fff` | `var(--space-navy)` | pasangan wajib dari fill putih (§2) |
+| Rotasi | `rotate(-2deg)` | sama | ini inti karakternya |
+| Lebar | `100%` | `104vw` + `margin-left:-2vw` | menutup celah segitiga di ujung kiri/kanan akibat rotasi; aman karena `body { overflow-x: hidden }` |
+| Animasi | `scroll 30s linear infinite` → `translateX(-50%)` | `marquee-scroll`, durasi sama | — |
+| Pause saat hover | `animation-play-state: paused` | sama | — |
+| Teks | "Design & Development" dll | **teks sendiri**: `Available for New Projects`, `UI/UX & Frontend Developer`, `To Infinity and Beyond` | jangan copy kalimat orang; item ke-3 ambil tagline hero kita sendiri |
+
+Dua hal teknis yang gampang dirusak kalau komponennya diedit:
+
+1. **Kenapa item dirender 4× total.** Loop `translateX(-50%)` hanya mulus kalau isi container terdiri
+   dari dua bagian identik. Dan satu bagian harus lebih lebar dari layar terlebar (≈1920px), padahal 3
+   item cuma ≈1050px. Jadi: `half = items × 2`, lalu `half` dirender 2×. Kalau jumlah/panjang item
+   diubah, cek lagi bahwa satu `half` masih > 1920px, kalau tidak akan ada jeda kosong.
+2. `aria-hidden="true"` di wrapper — teksnya dekoratif dan berulang, kalau dibaca screen reader jadi
+   spam. Jangan dilepas.
+
+Ada juga `@media (prefers-reduced-motion: reduce) { .marquee__content { animation: none } }` — pita
+tetap tampil, cuma berhenti bergerak.
 
 ## A.5 Yang sengaja TIDAK diambil
 
 Supaya tidak ada yang iseng menambahkannya lagi nanti:
 
-- **Marquee bar miring** (`rotate(-2deg)`, `animation: scroll 30s linear infinite`) — terlalu ramai.
 - **Bento grid** dengan `grid-area: span 2 / span 8` — grid project kita sudah settle.
 - **Aksen biru `#2563eb`** yang muncul di halaman `/work` dan `/showcase` referensi — palet kita
   monokrom, jangan masukkan hue baru.
