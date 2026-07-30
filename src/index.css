@@ -1224,136 +1224,184 @@ main {
   z-index: 2;
 }
 
-.contact__wrapper {
-  text-align: center;
-  max-width: 650px;
-  margin: 0 auto;
+.contact__grid {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 56px;
+  align-items: start;
+}
+
+/* ---------- Contact: kolom kiri (info) ---------- */
+.contact__info {
+  position: sticky;
+  top: 120px;
 }
 
 .contact__heading {
   font-size: clamp(2rem, 4vw, 3rem);
   font-weight: 800;
   color: var(--text-white);
-  margin-bottom: 16px;
+  margin-bottom: 20px;
   letter-spacing: -0.5px;
+  line-height: 1.2;
 }
 
 .contact__text {
   font-size: 1.05rem;
   color: var(--text-muted);
-  margin-bottom: 48px;
+  margin-bottom: 36px;
   line-height: 1.8;
+  max-width: 44ch;
 }
 
-.contact__links {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-
-.contact__link {
+.contact__details {
   display: flex;
   flex-direction: column;
+  gap: 18px;
+  list-style: none;
+}
+
+.contact__detail {
+  display: flex;
   align-items: center;
-  justify-content: center;
-  width: 140px;
-  height: 140px;
+  gap: 12px;
+  font-size: 0.95rem;
+  color: var(--text-light);
+}
+
+.contact__detail svg {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  color: var(--text-muted);
+}
+
+.contact__detail a {
+  color: inherit;
+  transition: color 0.3s ease;
+}
+
+.contact__detail a:hover {
+  color: var(--text-white);
+}
+
+/* ---------- Contact: kolom kanan (form) ---------- */
+.contact-form {
+  background: var(--surface-card);
+  border: 1px solid var(--surface-card-border);
+  border-radius: var(--radius-lg);
+  padding: 40px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: var(--shadow-card);
+}
+
+.contact-form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.contact-form__field {
+  margin-bottom: 24px;
+}
+
+.contact-form__field label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-white);
+}
+
+.contact-form__field input,
+.contact-form__field textarea {
+  width: 100%;
+  padding: 14px 16px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: var(--text-white);
   background: var(--surface-glass);
   border: 1px solid var(--surface-card-border);
-  border-radius: 50%;
-  position: relative;
+  border-radius: var(--radius-sm);
+  outline: none;
+  transition: var(--transition-smooth);
+}
+
+.contact-form__field input::placeholder,
+.contact-form__field textarea::placeholder {
+  color: var(--text-dim);
+}
+
+.contact-form__field input:focus,
+.contact-form__field textarea:focus {
+  background: var(--surface-glass-hover);
+  border-color: var(--surface-card-border-hover);
+}
+
+.contact-form__field textarea {
+  resize: vertical;
+  min-height: 130px;
+  line-height: 1.7;
+}
+
+/* Autofill browser memaksa background terang — override supaya tetap gelap */
+.contact-form__field input:-webkit-autofill,
+.contact-form__field input:-webkit-autofill:hover,
+.contact-form__field input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--text-white);
+  caret-color: var(--text-white);
+  -webkit-box-shadow: 0 0 0 1000px var(--space-indigo) inset;
+  transition: background-color 9999s ease-out;
+}
+
+/* Honeypot anti-spam: disembunyikan dari mata, tetap terisi oleh bot */
+.contact-form__honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
   overflow: hidden;
-  transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
-  box-shadow: var(--shadow-card);
-  cursor: pointer;
-  z-index: 1;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
 }
 
-.contact__link::before {
-  content: "";
-  position: absolute;
-  left: 50%;
-  bottom: -150%;
-  width: 300%;
-  height: 300%;
-  border-radius: 50%;
-  transform: translateX(-50%) scale(0);
-  transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
-  z-index: -1;
-}
-
-.contact__link:hover::before {
-  transform: translateX(-50%) scale(1);
-}
-
-.contact__link:active {
-  transform: scale(0.95);
-}
-
-/* Specific Brand Colors on Hover */
-.contact__link--email::before { background-color: #ea4335; }
-.contact__link--github::before { background-color: #24292e; }
-.contact__link--linkedin::before { background-color: #0077b5; }
-
-.contact__link-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 54px;
-  height: 54px;
-  background-color: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 50%;
-  transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  font-size: 1.8rem;
-  color: #fff;
-  z-index: 2;
-}
-
-.contact__link:hover .contact__link-icon {
-  transform: translateY(-20px) scale(0.85);
-  background-color: #fff;
-  border-color: #fff;
-}
-
-.contact__link--email:hover .contact__link-icon { color: #ea4335; }
-.contact__link--github:hover .contact__link-icon { color: #24292e; }
-.contact__link--linkedin:hover .contact__link-icon { color: #0077b5; }
-
-.contact__link-text {
-  position: absolute;
-  bottom: 25px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  z-index: 2;
+.contact-form__submit {
   width: 100%;
+  padding: 16px 32px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--space-navy);
+  background: #ffffff;
+  border: none;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: var(--transition-bounce);
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.15);
 }
 
-.contact__link:hover .contact__link-text {
-  opacity: 1;
-  transform: translateY(0);
+.contact-form__submit:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(255, 255, 255, 0.25);
 }
 
-.contact__link-text span {
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 1px;
+.contact-form__submit:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
 }
 
-@media (hover: hover) and (pointer: fine) {
-  .contact__link:hover {
-    border-color: rgba(255, 255, 255, 0.2);
-    box-shadow: var(--shadow-card-hover);
-    transform: translateY(-5px);
-  }
+.contact-form__feedback {
+  margin-top: 16px;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.contact-form__feedback--success {
+  color: var(--text-white);
+}
+
+.contact-form__feedback--error {
+  color: var(--accent-rose);
 }
 
 /* ============================================
@@ -1392,12 +1440,19 @@ main {
   max-width: var(--container-max);
   margin: 0 auto;
   display: flex;
+  flex-direction: column;
+  gap: 36px;
+  position: relative;
+  z-index: 10;
+}
+
+/* Baris atas: brand di kiri, ikon sosial rata kanan */
+.footer__top {
+  display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  gap: 16px;
-  position: relative;
-  z-index: 10;
+  gap: 20px;
 }
 
 .footer__brand {
@@ -1410,30 +1465,50 @@ main {
   background-clip: text;
 }
 
+.footer__socials {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.footer__social {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  background: var(--surface-glass);
+  border: 1px solid var(--surface-card-border);
+  border-radius: 50%;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: var(--transition-smooth);
+}
+
+.footer__social:hover {
+  color: var(--text-white);
+  background: var(--surface-glass-hover);
+  border-color: var(--surface-card-border-hover);
+  transform: translateY(-2px);
+}
+
+/* Baris bawah: copyright + tagline */
+.footer__bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding-top: 24px;
+  border-top: 1px solid var(--surface-card-border);
+}
+
+.footer__copyright,
 .footer__text {
   font-size: 0.8rem;
   color: var(--text-dim);
-}
-
-.footer__heart {
-  color: var(--accent-rose);
-  display: inline-block;
-  animation: heartbeat 1.5s ease-in-out infinite;
-}
-
-.footer__links {
-  display: flex;
-  gap: 24px;
-}
-
-.footer__link {
-  font-size: 0.85rem;
-  color: var(--text-dim);
-  transition: color 0.3s ease;
-}
-
-.footer__link:hover {
-  color: var(--text-white);
 }
 
 /* ============================================
@@ -1639,19 +1714,33 @@ main {
   }
 
   /* Contact mobile */
-  .contact__links {
-    flex-direction: column;
-    align-items: center;
+  .contact__grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
   }
 
-  .contact__link {
-    width: 140px;
-    height: 140px;
+  .contact__info {
+    position: static;
+  }
+
+  .contact__text {
+    max-width: none;
+  }
+
+  .contact-form {
+    padding: 28px 22px;
+  }
+
+  .contact-form__row {
+    grid-template-columns: 1fr;
+    gap: 0;
   }
 
   /* Footer mobile */
-  .footer__inner {
+  .footer__top,
+  .footer__bottom {
     flex-direction: column;
+    align-items: center;
     text-align: center;
   }
 }
@@ -1674,6 +1763,14 @@ main {
 
   .about__grid {
     gap: 40px;
+  }
+
+  .contact__grid {
+    gap: 36px;
+  }
+
+  .contact-form {
+    padding: 32px 28px;
   }
 }
 
