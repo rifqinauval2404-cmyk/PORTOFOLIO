@@ -1209,12 +1209,10 @@ main {
   opacity: 1;
 }
 
-/* height 240px = angka `.card-image` referensi. object-fit: contain + padding
-   sesuai design.md §6, karena isinya logo, bukan foto: `cover` memotong logonya. */
 .project-card__image-container {
   width: 100%;
   height: 240px;
-  padding: 26px;
+  padding: 0;
   overflow: hidden;
   position: relative;
   background: rgba(255, 255, 255, 0.03);
@@ -1227,7 +1225,8 @@ main {
 .project-card__img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
+  object-position: center;
   transition: transform 0.8s cubic-bezier(0.2, 0, 0.2, 1);
 }
 
