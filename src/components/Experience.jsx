@@ -77,7 +77,7 @@ const galleryItems = [
     text: 'Investpreneur'
   },
   {
-    image: '/KP_PLN.jpg',
+    image: '/dokumpln.jpeg',
     text: 'Kerja Praktek PLTGU'
   }
 ]
